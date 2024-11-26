@@ -1,5 +1,4 @@
 package Utils.State;
-import Model.Types.Int;
 import Utils.MyException;
 
 import java.util.HashMap;
@@ -9,7 +8,7 @@ public class MyHeap<V> implements IHeap<V> {
     public static int nextAddr = 0;
     protected Map<Integer, V> map;
     public MyHeap() {
-        map = new HashMap<Integer, V>();
+        map = new HashMap<>();
     }
 
     private int nextFreeAddr(){

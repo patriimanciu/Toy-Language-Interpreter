@@ -1,25 +1,18 @@
 package View;
 
 import Controller.Controller;
-import Model.Exp.ArithExp;
 import Model.Exp.ValueExp;
 import Model.Exp.VariableExpr;
 import Model.PrgState;
 import Model.Stmt.*;
-import Model.Types.Bool;
 import Model.Types.Int;
 import Model.Types.StringType;
-import Model.Values.BoolValue;
-import Model.Values.IntValue;
 import Model.Values.StringValue;
-import Model.Values.Value;
 import Repository.IRepo;
 import Repository.MyRepo;
 import Utils.*;
 import Utils.State.MyExeStack;
 import Utils.State.MyHeap;
-
-import java.util.Scanner;
 
 public class View {
     public View() {}

@@ -7,7 +7,7 @@ import Utils.MyException;
 import Utils.MyIList;
 
 public class PrintStmt implements IStmt{
-    private Exp expression;
+    private final Exp expression;
 
     public PrintStmt(Exp exp){
         this.expression = exp;

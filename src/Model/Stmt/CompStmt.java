@@ -2,12 +2,11 @@ package Model.Stmt;
 
 import Model.PrgState;
 import Utils.MyException;
-import Utils.MyIStack;
 import Utils.State.MyExeStack;
 
 public class CompStmt implements IStmt {
-    private IStmt firstStmt;
-    private IStmt secondStmt;
+    private final IStmt firstStmt;
+    private final IStmt secondStmt;
     public CompStmt(IStmt firstStmt, IStmt secondStmt) {
         this.firstStmt = firstStmt;
         this.secondStmt = secondStmt;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyList<T> implements MyIList<T>{
-    private List<T> list;
+    private final List<T> list;
     public MyList() {
         list = new ArrayList<>();
     }

@@ -2,7 +2,6 @@ package Model.Stmt;
 
 import Model.Exp.Exp;
 import Model.PrgState;
-import Model.Types.RefType;
 import Model.Values.RefValue;
 import Model.Values.Value;
 import Utils.MyException;

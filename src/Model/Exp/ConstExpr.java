@@ -1,6 +1,5 @@
 package Model.Exp;
 
-import Model.PrgState;
 import Model.Types.Type;
 import Model.Values.Value;
 import Utils.MyException;
@@ -25,7 +24,7 @@ public class ConstExpr implements Exp {
     }
 
     @Override
-    public Type typecheck(MyIDic<String, Value> typeTbl) throws MyException {
+    public Type typecheck(MyIDic<String, Value> typeTbl) {
         return value.getType();
     }
 }
