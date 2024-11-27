@@ -17,10 +17,21 @@ public class NewStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState prg) throws MyException {
-        Value value= exp.eval(prg.getSymTable(), prg.getMyHeapTable());
-        int address= prg.getMyHeapTable().put(value);
-        prg.getSymTable().put(name, new RefValue(address, value.getType()));
-        return prg;
+        Value v = prg.getSymTable().lookUp(name);
+        if (v == null)
+            throw new MyException("Variable not found");
+        if (v instanceof RefValue refVal) {
+            Value value= exp.eval(prg.getSymTable(), prg.getMyHeapTable());
+            if (value.getType().equals(refVal.getLocationType())) {
+                int address= prg.getMyHeapTable().put(value);
+                prg.getSymTable().put(name, new RefValue(address, value.getType()));
+                return prg;
+            }
+            else
+                throw new MyException("Value does not match the inner type");
+        }
+        else
+            throw new MyException("Value is not a RefValue");
     }
 
     @Override

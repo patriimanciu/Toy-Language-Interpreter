@@ -123,11 +123,6 @@ public class Interpreter {
 
         try {
             // Ref int v; new(v,20); print(rH(v)); wH(v,30); print(rH(v)+5);
-//            IStmt p6 = new CompStmt(new VariableDeclStmt("v", new RefType(new Int())),
-//                    new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
-//                            new CompStmt(new PrintStmt(new rH(new VariableExpr("v"))),
-//                                    new CompStmt(new WriteHeapStmt("v", new ValueExp(new IntValue(30))),
-//                                            new PrintStmt(new ArithExp('+', new rH(new VariableExpr("v")), new ValueExp(new IntValue(5))))))));
             IStmt p6 = new CompStmt(new VariableDeclStmt("v", new RefType(new Int())), new CompStmt(new NewStmt("v",
                     new ValueExp(new IntValue(20))),new CompStmt( new PrintStmt(new rH(new VariableExpr("v"))),
                     new CompStmt(new WriteHeapStmt("v", new ValueExp(new IntValue(30))), new PrintStmt(new ArithExp(

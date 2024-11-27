@@ -40,6 +40,7 @@ public class Controller {
 
     public void allStep() throws MyException {
         PrgState state = repository.getPrgState();
+        repository.logPrgStateExec(state);
         while (!state.getExeStack().isEmpty()) {
             oneStep(state);
             if (flag) {

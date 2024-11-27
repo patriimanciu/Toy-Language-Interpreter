@@ -14,6 +14,23 @@ public class RelationalExp implements Exp{
     private Exp leftExp;
     private Exp rightExp;
     private int operator; // 1 - <, 2 - <=, 3 - ==, 4 - !=, 5 - >, 6 - >=
+
+    private String operatorString(int op) {
+        if (op == 1)
+            return "<";
+        if (op == 2)
+            return "<=";
+        if (op == 3)
+            return "==";
+        if (op == 4)
+            return "!=";
+        if (op == 5)
+            return ">";
+        if (op == 6)
+            return ">=";
+        return "";
+    }
+
     public RelationalExp(String c, Exp leftExp, Exp rightExp) {
         this.leftExp = leftExp;
         this.rightExp = rightExp;
@@ -64,5 +81,9 @@ public class RelationalExp implements Exp{
     @Override
     public Type typecheck(MyIDic<String, Value> typeTbl) throws MyException {
         return null;
+    }
+
+    public String toString() {
+        return leftExp.toString() + " " + operatorString(operator) + " " + rightExp.toString();
     }
 }
