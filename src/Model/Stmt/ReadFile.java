@@ -38,7 +38,7 @@ public class ReadFile implements IStmt{
        } catch (Exception e) {
            throw new MyException("Error reading from file.");
        }
-       return state;
+       return null;
     }
 
     public String toString() {

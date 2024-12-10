@@ -33,6 +33,6 @@ public class VariableDeclStmt implements IStmt{
         if (symTable.contains(name))
             throw new MyException("Variable " + name + " already exists");
         symTable.put(name, type.defaultValue());
-        return state;
+        return null;
     }
 }

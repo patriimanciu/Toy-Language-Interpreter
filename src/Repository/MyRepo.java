@@ -20,9 +20,15 @@ public class MyRepo implements IRepo{
         repository = new ArrayList<>();
         repository.add(prg);
     }
+
     @Override
-    public PrgState getPrgState() {
-        return repository.getFirst();
+    public List<PrgState> getPrgList() {
+        return repository;
+    }
+
+    @Override
+    public void setPrgList(List<PrgState> prgList) {
+        repository = prgList;
     }
 
     @Override

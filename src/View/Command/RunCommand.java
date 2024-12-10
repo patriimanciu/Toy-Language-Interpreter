@@ -18,6 +18,8 @@ public class RunCommand extends Command {
             System.out.println("All run steps executed");
         } catch (MyException e) {
             System.out.println(e.getMessage());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }

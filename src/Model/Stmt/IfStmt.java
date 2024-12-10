@@ -50,6 +50,6 @@ public class IfStmt implements IStmt{
             stack.push(thenStmt);
         else
             stack.push(elseStmt);
-        return state;
+        return null;
     }
 }

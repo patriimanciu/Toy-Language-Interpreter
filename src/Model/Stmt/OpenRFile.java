@@ -36,7 +36,7 @@ public class OpenRFile implements IStmt {
         else {
             throw new MyException("Expression is not string.");
         }
-        return state;
+        return null;
     }
 
     public String toString() {

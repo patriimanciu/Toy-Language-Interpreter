@@ -21,7 +21,7 @@ public class WhileStmt implements IStmt{
                 state.getExeStack().push(this);
                 state.getExeStack().push(statement);
             }
-            return state;
+            return null;
         }
         else
             throw new MyException("While condition should evaluate to a BooleanType");

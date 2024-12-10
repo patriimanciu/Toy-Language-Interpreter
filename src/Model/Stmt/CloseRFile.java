@@ -29,7 +29,7 @@ public class CloseRFile implements IStmt {
         } catch (Exception e) {
             throw new MyException("Error closing the file.");
         }
-        return state;
+        return null;
     }
 
     public String toString() {

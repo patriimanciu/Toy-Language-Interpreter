@@ -18,7 +18,7 @@ public class PrintStmt implements IStmt{
         Value val = expression.eval(state.getSymTable(), state.getMyHeapTable());
         MyIList<Value> out = state.getOut();
         out.add(val);
-        return state;
+        return null;
     }
 
     public String toString(){

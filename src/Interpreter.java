@@ -16,12 +16,9 @@ import Utils.State.MyHeap;
 import View.Command.ExitCommand;
 import View.Command.RunCommand;
 import View.TextMenu;
-import View.View;
 
 public class Interpreter {
     public static void main(String[] args) {
-        View view = new View();
-        view.runTest();
 
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0", "exit"));
@@ -160,6 +157,47 @@ public class Interpreter {
             IRepo repo7 = new MyRepo(prg7, "log7.txt");
             Controller ctrl7 = new Controller(repo7);
             menu.addCommand(new RunCommand("7", p7.toString(), ctrl7));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            // int v; Ref int a; v=10; new(a,22); fork(wH(a,30);v=32;print(v);print(rH(a))); print(v);print(rH(a))
+            IStmt p8 = new CompStmt(
+                    new VariableDeclStmt("v", new Int()),  // int v
+                    new CompStmt(
+                            new VariableDeclStmt("a", new RefType(new Int())),  // Ref int a
+                            new CompStmt(
+                                    new AssignStmt("v", new ValueExp(new IntValue(10))),  // v = 10
+                                    new CompStmt(
+                                            new NewStmt("a", new ValueExp(new IntValue(22))),  // new(a, 22)
+                                            new CompStmt(
+                                                    new ForkStmt(
+                                                            new CompStmt(
+                                                                    new WriteHeapStmt("a", new ValueExp(new IntValue(30))),  // wH(a, 30)
+                                                                    new CompStmt(
+                                                                            new AssignStmt("v", new ValueExp(new IntValue(32))),  // v = 32
+                                                                            new CompStmt(
+                                                                                    new PrintStmt(new VariableExpr("v")),  // print v
+                                                                                    new PrintStmt(new rH(new VariableExpr("a")))  // print rH(a)
+                                                                            )
+                                                                    )
+                                                            )
+                                                    ),
+                                                    new CompStmt(
+                                                            new PrintStmt(new VariableExpr("v")),  // print v
+                                                            new PrintStmt(new rH(new VariableExpr("a")))  // print rH(a)
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
+            );
+            PrgState prg8 = new PrgState(new MyExeStack(), new MyDic<>(), new MyDic<>(), new MyHeap<>(), new MyList<>(), p8);
+            IRepo repo8 = new MyRepo(prg8, "log8.txt");
+            Controller ctrl8 = new Controller(repo8);
+            menu.addCommand(new RunCommand("8", p8.toString(), ctrl8));
         }
         catch (Exception e) {
             e.printStackTrace();

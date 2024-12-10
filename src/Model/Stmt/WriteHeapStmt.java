@@ -29,7 +29,7 @@ public class WriteHeapStmt implements IStmt{
             Value newV=valueExpression.eval(state.getSymTable(),state.getMyHeapTable());
             if (newV.getType().equals(rv.getLocationType())) {
                 state.getMyHeapTable().update(rv.getAddr(), newV);
-                return state;
+                return null;
             }
             else throw new MyException("The type of the variable is not the same as the type of the location! Expected type: " + rv.getType() + "; Actual type: " + newV.getType());
 

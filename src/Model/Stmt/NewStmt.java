@@ -25,7 +25,7 @@ public class NewStmt implements IStmt {
             if (value.getType().equals(refVal.getLocationType())) {
                 int address= prg.getMyHeapTable().put(value);
                 prg.getSymTable().put(name, new RefValue(address, value.getType()));
-                return prg;
+                return null;
             }
             else
                 throw new MyException("Value does not match the inner type");

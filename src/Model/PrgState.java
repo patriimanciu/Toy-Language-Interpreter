@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class PrgState {
+    private int ID;
+    private static int lastID = 0;
     private MyExeStack exeStack;
     public MyExeStack getExeStack() {
         return exeStack;
@@ -54,6 +56,24 @@ public class PrgState {
         return originalProgram;
     }
 
+    public Boolean isNotCompleted() {
+        return !exeStack.isEmpty();
+    }
+
+    public PrgState oneStep() throws MyException {
+        if(exeStack.isEmpty())
+            throw new MyException("PrgState stack is empty.");
+        IStmt curr = exeStack.pop();
+        if (curr instanceof NopStmt)
+            return this;
+        return curr.execute(this);
+    }
+
+    public synchronized int setID () {
+        lastID++;
+        return lastID;
+    }
+
     private MyIDic<StringValue, BufferedReader> fileTable;
     public PrgState(MyExeStack stk, MyIDic<String, Value> symtbl, MyIDic<StringValue, BufferedReader> filetbl, MyHeap<Value> heapTable, MyList<Value> ot, IStmt prg) {
         exeStack = stk;
@@ -63,10 +83,11 @@ public class PrgState {
         out = ot;
         originalProgram = prg;
         stk.push(prg);
+        ID = setID();
     }
 
     public String toString() {
-        return "----------------------------------------------- \n ExeStack: " + distinctStatamentsString() +
+        return "----------------------------------------------- \n ID: " + ID + "\n ExeStack: " + distinctStatamentsString() +
                 "\n SymTable: " + symTable.toString() +
                 "\n Out: " + out.toString() +
                 "\n FileTable: " + getFileTableList() +

@@ -38,6 +38,6 @@ public class AssignStmt implements IStmt{
         }
         else
             throw new MyException("Variable '" + variableName + "' not found");
-        return state;
+        return null;
     }
 }
