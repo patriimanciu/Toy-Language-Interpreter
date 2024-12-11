@@ -17,7 +17,7 @@ public class ForkStmt implements IStmt{
     @Override
     public PrgState execute(PrgState state) throws MyException {
         MyExeStack newStack = new MyExeStack();
-        newStack.push(statement);
+//        newStack.push(statement);
         MyIDic<String, Value> newSymTable = new MyDic<>();
         for (Map.Entry<String, Value> entry: state.getSymTable().getMap().entrySet()) {
             newSymTable.put(entry.getKey(), entry.getValue());
