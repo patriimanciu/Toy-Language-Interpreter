@@ -2,9 +2,12 @@ package Model.Stmt;
 
 import Model.Exp.Exp;
 import Model.PrgState;
+import Model.Types.RefType;
+import Model.Types.Type;
 import Model.Values.RefValue;
 import Model.Values.Value;
 import Utils.MyException;
+import Utils.MyIDic;
 
 public class NewStmt implements IStmt {
     String name;
@@ -32,6 +35,16 @@ public class NewStmt implements IStmt {
         }
         else
             throw new MyException("Value is not a RefValue");
+    }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        Type typeExp = exp.typecheck(typeEnv);
+        Type typeVar = typeEnv.lookUp(name);
+        if (typeVar.equals(new RefType(typeExp)))
+            return typeEnv;
+        else
+            throw new MyException("Error: NEW Stmt right hand side and left hand side have different types");
     }
 
     @Override

@@ -24,7 +24,7 @@ public class ConstExpr implements Exp {
     }
 
     @Override
-    public Type typecheck(MyIDic<String, Value> typeTbl) {
+    public Type typecheck(MyIDic<String, Type> typeTbl) throws MyException {
         return value.getType();
     }
 }

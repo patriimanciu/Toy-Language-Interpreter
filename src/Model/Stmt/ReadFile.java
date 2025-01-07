@@ -4,9 +4,11 @@ import Model.Exp.Exp;
 import Model.PrgState;
 import Model.Types.Int;
 import Model.Types.StringType;
+import Model.Types.Type;
 import Model.Values.IntValue;
 import Model.Values.StringValue;
 import Utils.MyException;
+import Utils.MyIDic;
 
 public class ReadFile implements IStmt{
     private Exp exp;
@@ -39,6 +41,18 @@ public class ReadFile implements IStmt{
            throw new MyException("Error reading from file.");
        }
        return null;
+    }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        if (exp.typecheck(typeEnv).equals(new StringType()))
+            if (typeEnv.lookUp(varName).equals(new Int()))
+                return typeEnv;
+            else
+                throw new MyException("ReadFile requires an int as its variable parameter.");
+        else
+            throw new MyException("ReadFile requires a string as es Expressions parameter.");
+
     }
 
     public String toString() {

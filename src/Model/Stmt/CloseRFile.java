@@ -3,8 +3,10 @@ package Model.Stmt;
 import Model.Exp.Exp;
 import Model.PrgState;
 import Model.Types.StringType;
+import Model.Types.Type;
 import Model.Values.StringValue;
 import Utils.MyException;
+import Utils.MyIDic;
 
 public class CloseRFile implements IStmt {
     private Exp expression;
@@ -30,6 +32,14 @@ public class CloseRFile implements IStmt {
             throw new MyException("Error closing the file.");
         }
         return null;
+    }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        if (expression.typecheck(typeEnv).equals(new StringType()))
+            return typeEnv;
+        else
+            throw new MyException("Invalid expression CloseReadFile: not a string.");
     }
 
     public String toString() {

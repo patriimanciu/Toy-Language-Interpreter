@@ -11,4 +11,5 @@ public interface MyIDic<K,V> {
     void remove(K key);
     List<K> getKeys();
     Map<K,V> getMap();
+    MyIDic<K, V> deepCopy() throws MyException;
 }

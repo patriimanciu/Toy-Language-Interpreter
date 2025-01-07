@@ -1,5 +1,7 @@
 package Model.Exp;
 
+import Model.Types.Bool;
+import Model.Types.Int;
 import Model.Types.Type;
 import Model.Values.BoolValue;
 import Model.Values.IntValue;
@@ -79,8 +81,18 @@ public class RelationalExp implements Exp{
     }
 
     @Override
-    public Type typecheck(MyIDic<String, Value> typeTbl) throws MyException {
-        return null;
+    public Type typecheck(MyIDic<String, Type> typeTbl) throws MyException {
+        Type t1, t2;
+        t1 = leftExp.typecheck(typeTbl);
+        t2 = rightExp.typecheck(typeTbl);
+        if (t1.equals(new Int())) {
+            if (t2.equals(new Int()))
+                return new Bool();
+            else
+                throw new MyException("Error: Second operand must be Int");
+        }
+        else
+            throw new MyException("Error: First operand must be Int");
     }
 
     public String toString() {

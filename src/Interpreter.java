@@ -6,6 +6,7 @@ import Model.Types.Int;
 import Model.Types.RefType;
 import Model.Values.BoolValue;
 import Model.Values.IntValue;
+import Model.Values.StringValue;
 import Repository.IRepo;
 import Repository.MyRepo;
 import Utils.MyDic;
@@ -25,8 +26,9 @@ public class Interpreter {
 
         try {
             IStmt p1 = new CompStmt(new VariableDeclStmt("v", new Int()),
-                    new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(2))),
+                    new CompStmt(new AssignStmt("v", new ValueExp(new StringValue("2"))),
                             new PrintStmt(new VariableExpr("v"))));
+            p1.typecheck(new MyDic<>());
             PrgState prg1 = new PrgState(new MyExeStack(), new MyDic<>(), new MyDic<>(), new MyHeap<>(), new MyList<>(), p1);
             IRepo repo1 = new MyRepo(prg1, "log1.txt");
             Controller ctrl1 = new Controller(repo1);
@@ -46,6 +48,7 @@ public class Interpreter {
                                     new CompStmt(new AssignStmt("b",
                                             new ArithExp('+',new VariableExpr("a"), new ValueExp(new IntValue(1)))),
                                             new PrintStmt(new VariableExpr("b"))))));
+            p2.typecheck(new MyDic<>());
             PrgState prg2 = new PrgState(new MyExeStack(), new MyDic<>(), new MyDic<>(), new MyHeap<>(), new MyList<>(), p2);
             IRepo repo2 = new MyRepo(prg2, "log2.txt");
             Controller ctrl2 = new Controller(repo2);
@@ -54,9 +57,6 @@ public class Interpreter {
         catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
 
         try {
             IStmt p3 = new CompStmt(new VariableDeclStmt("a",new Bool()),
@@ -67,6 +67,7 @@ public class Interpreter {
                                             new AssignStmt("v", new ValueExp(new IntValue(3)))),
                                             new PrintStmt(new VariableExpr("v"))))));
 
+            p3.typecheck(new MyDic<>());
             PrgState prg3 = new PrgState(new MyExeStack(), new MyDic<>(), new MyDic<>(), new MyHeap<>(), new MyList<>(), p3);
             IRepo repo3 = new MyRepo(prg3, "log3.txt");
             Controller ctrl3 = new Controller(repo3);
@@ -75,7 +76,6 @@ public class Interpreter {
         catch (Exception e) {
             e.printStackTrace();
         }
-
 
         try {
 //        Ref int v;new(v,20);Ref Ref int a; new(a,v);print(v);print(a)
@@ -87,6 +87,7 @@ public class Interpreter {
                                             new CompStmt(new PrintStmt(new VariableExpr("v")),
                                                     new PrintStmt(new VariableExpr("a")))))));
 
+            p4.typecheck(new MyDic<>());
             PrgState prg4 = new PrgState(new MyExeStack(), new MyDic<>(), new MyDic<>(), new MyHeap<>(), new MyList<>(), p4);
             IRepo repo4 = new MyRepo(prg4, "log4.txt");
             Controller ctrl4 = new Controller(repo4);
@@ -95,7 +96,6 @@ public class Interpreter {
         catch (Exception e) {
             e.printStackTrace();
         }
-
 
         try {
             // Ref int v;new(v,20);Ref Ref int a; new(a,v); new(v,30);print(rH(rH(a)))
@@ -108,6 +108,7 @@ public class Interpreter {
                                                     new CompStmt(new PrintStmt(new rH(new VariableExpr("v"))),
                                                             new PrintStmt(new rH(new rH(new VariableExpr("a"))))))))));
 
+            p5.typecheck(new MyDic<>());
             PrgState prg5 = new PrgState(new MyExeStack(), new MyDic<>(), new MyDic<>(), new MyHeap<>(), new MyList<>(), p5);
             IRepo repo5 = new MyRepo(prg5, "log5.txt");
             Controller ctrl5 = new Controller(repo5);
@@ -117,7 +118,6 @@ public class Interpreter {
             e.printStackTrace();
         }
 
-
         try {
             // Ref int v; new(v,20); print(rH(v)); wH(v,30); print(rH(v)+5);
             IStmt p6 = new CompStmt(new VariableDeclStmt("v", new RefType(new Int())), new CompStmt(new NewStmt("v",
@@ -125,6 +125,7 @@ public class Interpreter {
                     new CompStmt(new WriteHeapStmt("v", new ValueExp(new IntValue(30))), new PrintStmt(new ArithExp(
                             '+',new rH(new VariableExpr("v")),new ValueExp(new IntValue(5))))))));
 
+            p6.typecheck(new MyDic<>());
             PrgState prg6 = new PrgState(new MyExeStack(), new MyDic<>(), new MyDic<>(), new MyHeap<>(), new MyList<>(), p6);
             IRepo repo6 = new MyRepo(prg6, "log6.txt");
             Controller ctrl6 = new Controller(repo6);
@@ -133,7 +134,6 @@ public class Interpreter {
         catch (Exception e) {
             e.printStackTrace();
         }
-
 
         try {
             // int v; v=4; (while (v>0) print(v);v=v-1);print(v)
@@ -153,6 +153,7 @@ public class Interpreter {
                             )
                     )
             );
+            p7.typecheck(new MyDic<>());
             PrgState prg7 = new PrgState(new MyExeStack(), new MyDic<>(), new MyDic<>(), new MyHeap<>(), new MyList<>(), p7);
             IRepo repo7 = new MyRepo(prg7, "log7.txt");
             Controller ctrl7 = new Controller(repo7);
@@ -194,6 +195,7 @@ public class Interpreter {
                             )
                     )
             );
+            p8.typecheck(new MyDic<>());
             PrgState prg8 = new PrgState(new MyExeStack(), new MyDic<>(), new MyDic<>(), new MyHeap<>(), new MyList<>(), p8);
             IRepo repo8 = new MyRepo(prg8, "log8.txt");
             Controller ctrl8 = new Controller(repo8);

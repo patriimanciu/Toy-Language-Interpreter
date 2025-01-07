@@ -23,7 +23,7 @@ public class ValueExp implements Exp {
     }
 
     @Override
-    public Type typecheck(MyIDic<String, Value> typeTbl) throws MyException {
-        return null;
+    public Type typecheck(MyIDic<String, Type> typeTbl) throws MyException {
+        return expr.getType();
     }
 }

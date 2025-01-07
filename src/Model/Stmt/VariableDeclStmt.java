@@ -35,4 +35,10 @@ public class VariableDeclStmt implements IStmt{
         symTable.put(name, type.defaultValue());
         return null;
     }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        typeEnv.put(name, type);
+        return typeEnv;
+    }
 }

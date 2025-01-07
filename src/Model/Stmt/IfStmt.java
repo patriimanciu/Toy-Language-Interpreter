@@ -3,6 +3,7 @@ package Model.Stmt;
 import Model.Exp.Exp;
 import Model.PrgState;
 import Model.Types.Bool;
+import Model.Types.Type;
 import Model.Values.BoolValue;
 import Model.Values.Value;
 import Utils.MyException;
@@ -51,5 +52,17 @@ public class IfStmt implements IStmt{
         else
             stack.push(elseStmt);
         return null;
+    }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        Type typeExpr = expression.typecheck(typeEnv);
+        if (typeExpr.equals(new Bool())) {
+            thenStmt.typecheck(typeEnv.deepCopy());
+            elseStmt.typecheck(typeEnv.deepCopy());
+            return typeEnv;
+        }
+        else
+            throw new MyException("Condition is not boolean");
     }
 }

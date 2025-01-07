@@ -1,6 +1,7 @@
 package Model.Stmt;
 
 import Model.PrgState;
+import Model.Types.Type;
 import Model.Values.Value;
 import Utils.*;
 import Utils.State.MyExeStack;
@@ -23,6 +24,12 @@ public class ForkStmt implements IStmt{
             newSymTable.put(entry.getKey(), entry.getValue());
         }
         return new PrgState(newStack, newSymTable, state.getFileTable(), (MyHeap<Value>) state.getMyHeapTable(), state.getOut(), statement);
+    }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        statement.typecheck(typeEnv.deepCopy());
+        return typeEnv;
     }
 
     @Override

@@ -88,7 +88,17 @@ public class ArithExp implements Exp{
     }
 
     @Override
-    public Type typecheck(MyIDic<String, Value> typeTbl) throws MyException {
-        return null;
+    public Type typecheck(MyIDic<String, Type> typeTbl) throws MyException {
+        Type t1, t2;
+        t1 = exp1.typecheck(typeTbl);
+        t2 = exp2.typecheck(typeTbl);
+        if (t1.equals(new Int())) {
+            if (t2.equals(new Int()))
+                return new Int();
+            else
+                throw new MyException("Error: Second operand is not an integer");
+        }
+        else
+            throw new MyException("Error: First operand is not an integer");
     }
 }

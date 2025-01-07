@@ -46,6 +46,14 @@ public class MyDic<K, V> implements MyIDic<K, V>{
         return dic;
     }
 
+    @Override
+    public MyIDic<K, V> deepCopy() throws MyException {
+        MyIDic<K, V> toReturn = new MyDic<>();
+        for (K key: getKeys())
+            toReturn.put(key, lookUp(key));
+        return toReturn;
+    }
+
     public String toString() {
         return dic.toString();
     }

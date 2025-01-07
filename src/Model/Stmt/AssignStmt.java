@@ -40,4 +40,14 @@ public class AssignStmt implements IStmt{
             throw new MyException("Variable '" + variableName + "' not found");
         return null;
     }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        Type typeVar = typeEnv.lookUp(variableName);
+        Type typeEx = expression.typecheck(typeEnv);
+        if (typeVar.equals(typeEx))
+            return typeEnv;
+        else
+            throw new MyException("Assignment: right hand side and left hand side have different types ");
+    }
 }

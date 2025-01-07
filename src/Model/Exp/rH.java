@@ -30,7 +30,7 @@ public class rH implements Exp{
     }
 
     @Override
-    public Type typecheck(MyIDic<String, Value> typeTbl) throws MyException {
+    public Type typecheck(MyIDic<String, Type> typeTbl) throws MyException {
         Type type = expr.typecheck(typeTbl);
         if (!(type instanceof RefType))
             throw new MyException("Heap should only be accessed through references");

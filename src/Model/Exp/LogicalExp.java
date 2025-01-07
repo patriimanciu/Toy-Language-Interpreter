@@ -63,7 +63,17 @@ public class LogicalExp implements Exp{
     }
 
     @Override
-    public Type typecheck(MyIDic<String, Value> typeTbl) throws MyException {
-        return null;
+    public Type typecheck(MyIDic<String, Type> typeTbl) throws MyException {
+        Type t1, t2;
+        t1 = first.typecheck(typeTbl);
+        t2 = second.typecheck(typeTbl);
+        if (t1.equals(new Bool())) {
+            if (t2.equals(new Bool()))
+                return new Bool();
+            else
+                throw new MyException("Error: Second operand must be bool");
+        }
+        else
+            throw new MyException("Error: First operand must be bool");
     }
 }

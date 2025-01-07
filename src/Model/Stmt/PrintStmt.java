@@ -2,8 +2,10 @@ package Model.Stmt;
 
 import Model.Exp.Exp;
 import Model.PrgState;
+import Model.Types.Type;
 import Model.Values.Value;
 import Utils.MyException;
+import Utils.MyIDic;
 import Utils.MyIList;
 
 public class PrintStmt implements IStmt{
@@ -19,6 +21,12 @@ public class PrintStmt implements IStmt{
         MyIList<Value> out = state.getOut();
         out.add(val);
         return null;
+    }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        expression.typecheck(typeEnv);
+        return typeEnv;
     }
 
     public String toString(){

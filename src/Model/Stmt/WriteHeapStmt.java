@@ -2,9 +2,12 @@ package Model.Stmt;
 
 import Model.Exp.Exp;
 import Model.PrgState;
+import Model.Types.RefType;
+import Model.Types.Type;
 import Model.Values.RefValue;
 import Model.Values.Value;
 import Utils.MyException;
+import Utils.MyIDic;
 
 public class WriteHeapStmt implements IStmt{
     String varName;
@@ -35,5 +38,14 @@ public class WriteHeapStmt implements IStmt{
 
         }
         else throw new MyException("The variable is not a RefValue!");
+    }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        if (typeEnv.lookUp(varName).equals(new RefType(valueExpression.typecheck(typeEnv))))
+            return typeEnv;
+        else
+            throw new MyException("WriteHeap: right hand side and left hand side have different types.");
+
     }
 }

@@ -1,7 +1,10 @@
 package Model.Stmt;
 
 import Model.PrgState;
+import Model.Types.Type;
+import Model.Values.Value;
 import Utils.MyException;
+import Utils.MyIDic;
 import Utils.State.MyExeStack;
 
 public class CompStmt implements IStmt {
@@ -26,6 +29,11 @@ public class CompStmt implements IStmt {
             stack.push(secondStmt);
             stack.push(firstStmt);
             return null;
+    }
+
+    @Override
+    public MyIDic<String, Type> typecheck(MyIDic<String, Type> typeEnv) throws MyException {
+        return secondStmt.typecheck(firstStmt.typecheck(typeEnv));
     }
 
     @Override
