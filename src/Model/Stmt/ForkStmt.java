@@ -1,11 +1,15 @@
 package Model.Stmt;
 
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Types.Type;
 import Model.Values.Value;
-import Utils.*;
+import Utils.Collections.MyDic;
+import Utils.Collections.MyIDic;
+import Utils.Collections.MyStack;
+import Utils.Exceptions.MyException;
 import Utils.State.MyExeStack;
 import Utils.State.MyHeap;
+import Utils.State.MyLockTable;
 
 import java.util.Map;
 
@@ -17,13 +21,13 @@ public class ForkStmt implements IStmt{
     }
     @Override
     public PrgState execute(PrgState state) throws MyException {
-        MyExeStack newStack = new MyExeStack();
+        MyStack newStack = new MyStack();
 //        newStack.push(statement);
         MyIDic<String, Value> newSymTable = new MyDic<>();
         for (Map.Entry<String, Value> entry: state.getSymTable().getMap().entrySet()) {
             newSymTable.put(entry.getKey(), entry.getValue());
         }
-        return new PrgState(newStack, newSymTable, state.getFileTable(), (MyHeap<Value>) state.getMyHeapTable(), state.getOut(), statement);
+        return new PrgState(newStack, newSymTable, state.getFileTable(), (MyHeap<Value>) state.getMyHeapTable(), (MyLockTable) state.getLockTable(), state.getOut(), statement);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package Utils;
+package Utils.Collections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,11 @@ public class MyList<T> implements MyIList<T>{
     @Override
     public T[] toList() {
         return (T[]) list.toArray();
+    }
+
+    @Override
+    public List<T> getList() {
+        return list;
     }
 
     public String toString() {

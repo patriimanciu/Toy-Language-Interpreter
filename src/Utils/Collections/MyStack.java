@@ -1,8 +1,9 @@
-package Utils;
+package Utils.Collections;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import Model.Stmt.IStmt;
+import Utils.Exceptions.MyException;
+
+import java.util.*;
 
 public class MyStack<T> implements MyIStack<T> {
     private Stack<T> stack;
@@ -31,6 +32,11 @@ public class MyStack<T> implements MyIStack<T> {
         return (List<T>) Arrays.asList(stack.toArray());
     }
 
+    @Override
+    public T toArray() {
+        return (T) stack.toArray();
+    }
+
     public String toString() {
         return stack.toString();
     }
@@ -41,5 +47,14 @@ public class MyStack<T> implements MyIStack<T> {
             newStack.push(elem);
         }
         return newStack;
+    }
+
+    public List<IStmt> getReversed() {
+        List<IStmt> reversedList = new ArrayList<>();
+        for (Object obj : stack) {
+            reversedList.add((IStmt) obj); // Ensure 'obj' is truly of type IStmt
+        }
+        Collections.reverse(reversedList);
+        return reversedList;
     }
 }

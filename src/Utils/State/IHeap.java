@@ -1,5 +1,5 @@
 package Utils.State;
-import Utils.MyException;
+import Utils.Exceptions.MyException;
 
 import java.util.Map;
 

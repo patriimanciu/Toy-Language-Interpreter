@@ -1,4 +1,6 @@
-package Utils;
+package Utils.Collections;
+
+import Utils.Exceptions.MyException;
 
 import java.util.List;
 import java.util.Map;

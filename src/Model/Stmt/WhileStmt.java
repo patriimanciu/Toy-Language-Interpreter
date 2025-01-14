@@ -1,12 +1,12 @@
 package Model.Stmt;
 
 import Model.Exp.Exp;
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Types.Bool;
 import Model.Types.Type;
 import Model.Values.BoolValue;
-import Utils.MyException;
-import Utils.MyIDic;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
 
 public class WhileStmt implements IStmt{
     Exp condition;

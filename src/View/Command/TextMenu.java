@@ -1,6 +1,5 @@
-package View;
+package View.Command;
 
-import View.Command.Command;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

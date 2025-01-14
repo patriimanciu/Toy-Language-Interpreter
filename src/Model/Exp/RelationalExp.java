@@ -6,8 +6,8 @@ import Model.Types.Type;
 import Model.Values.BoolValue;
 import Model.Values.IntValue;
 import Model.Values.Value;
-import Utils.MyException;
-import Utils.MyIDic;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
 import Utils.State.IHeap;
 
 import java.util.Objects;

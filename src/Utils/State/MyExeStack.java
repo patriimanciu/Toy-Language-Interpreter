@@ -1,9 +1,9 @@
 package Utils.State;
 
 import Model.Stmt.IStmt;
-import Utils.MyException;
-import Utils.MyIStack;
-import Utils.MyStack;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIStack;
+import Utils.Collections.MyStack;
 
 import java.util.List;
 

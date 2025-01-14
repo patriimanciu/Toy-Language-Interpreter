@@ -1,4 +1,6 @@
-package Utils;
+package Utils.Collections;
+
+import Utils.Exceptions.MyException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

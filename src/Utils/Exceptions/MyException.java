@@ -1,4 +1,4 @@
-package Utils;
+package Utils.Exceptions;
 
 public class MyException extends Exception{
     public MyException(String msg) {

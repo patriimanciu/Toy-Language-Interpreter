@@ -1,9 +1,9 @@
 package Model.Stmt;
 
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Types.Type;
-import Utils.MyException;
-import Utils.MyIDic;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
 
 public class NopStmt implements IStmt{
 

@@ -1,7 +1,7 @@
 package Repository;
 
-import Model.PrgState;
-import Utils.MyException;
+import Model.ProgramState.PrgState;
+import Utils.Exceptions.MyException;
 
 import java.util.List;
 

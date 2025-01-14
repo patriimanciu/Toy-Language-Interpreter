@@ -4,8 +4,8 @@ import Model.Types.RefType;
 import Model.Types.Type;
 import Model.Values.RefValue;
 import Model.Values.Value;
-import Utils.MyException;
-import Utils.MyIDic;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
 import Utils.State.IHeap;
 
 public class rH implements Exp{

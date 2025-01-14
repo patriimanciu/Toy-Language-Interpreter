@@ -1,12 +1,12 @@
 package Model.Stmt;
 
 import Model.Exp.Exp;
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Types.StringType;
 import Model.Types.Type;
 import Model.Values.StringValue;
-import Utils.MyException;
-import Utils.MyIDic;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
 
 public class CloseRFile implements IStmt {
     private Exp expression;
@@ -22,12 +22,12 @@ public class CloseRFile implements IStmt {
         var value = expression.eval(state.getSymTable(), state.getMyHeapTable());
         if (!value.getType().equals(str))
             throw new MyException("Invalid expression: not a string.");
-        var buff = state.getFileTable().lookUp((StringValue) value);
+        var buff = state.getFileTable().lookUp(value.toString());
         if (buff == null)
             throw new MyException("File not opened.");
         try {
             buff.close();
-            state.getFileTable().remove((StringValue) value);
+            state.getFileTable().remove(value.toString());
         } catch (Exception e) {
             throw new MyException("Error closing the file.");
         }

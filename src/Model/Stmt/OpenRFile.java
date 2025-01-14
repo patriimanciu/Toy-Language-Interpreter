@@ -1,13 +1,13 @@
 package Model.Stmt;
 
 import Model.Exp.Exp;
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Types.StringType;
 import Model.Types.Type;
 import Model.Values.StringValue;
 import Model.Values.Value;
-import Utils.MyException;
-import Utils.MyIDic;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,11 +26,16 @@ public class OpenRFile implements IStmt {
         Value value = expression.eval(state.getSymTable(), state.getMyHeapTable());
         if (value.getType().equals(str)) {
             StringValue file = (StringValue) value;
-            if (state.getFileTable().contains(file))
+//            System.out.println(file);
+//            System.out.println(file.getValue());
+//            System.out.println(file.getType());
+//            System.out.println("test.in".equals(file.toString()));
+            if (state.getFileTable().contains(file.getValue()))
                 throw new MyException("File already opened");
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(file.getValue()));
-                state.getFileTable().put(file, reader);
+                String path = file.getValue();
+                BufferedReader reader = new BufferedReader(new FileReader(path));
+                state.getFileTable().put(file.getValue(), reader);
             } catch (IOException e) {
                 throw new MyException("Error opening file: File not found.");
             }

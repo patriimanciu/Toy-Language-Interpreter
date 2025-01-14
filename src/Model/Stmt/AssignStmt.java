@@ -1,11 +1,12 @@
 package Model.Stmt;
 
 import Model.Exp.Exp;
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Types.Type;
 import Model.Values.Value;
-import Utils.MyException;
-import Utils.MyIDic;
+import Utils.Collections.MyStack;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
 import Utils.State.IHeap;
 import Utils.State.MyExeStack;
 
@@ -24,7 +25,7 @@ public class AssignStmt implements IStmt{
 
     @Override
     public PrgState execute(PrgState state) throws MyException {
-        MyExeStack stack = state.getExeStack();
+        MyStack stack = state.getExeStack();
         MyIDic<String, Value> symTable = state.getSymTable();
         IHeap<Value> heap = state.getMyHeapTable();
         if (symTable.contains(variableName)){

@@ -1,12 +1,12 @@
 package Model.Stmt;
 
 import Model.Exp.Exp;
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Types.Type;
 import Model.Values.Value;
-import Utils.MyException;
-import Utils.MyIDic;
-import Utils.MyIList;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
+import Utils.Collections.MyIList;
 
 public class PrintStmt implements IStmt{
     private final Exp expression;

@@ -1,4 +1,4 @@
-package Utils;
+package Utils.Collections;
 
 public class Node<T> {
     T value;

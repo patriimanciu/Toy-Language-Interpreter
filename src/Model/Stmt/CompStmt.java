@@ -1,10 +1,10 @@
 package Model.Stmt;
 
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Types.Type;
-import Model.Values.Value;
-import Utils.MyException;
-import Utils.MyIDic;
+import Utils.Collections.MyStack;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
 import Utils.State.MyExeStack;
 
 public class CompStmt implements IStmt {
@@ -25,7 +25,7 @@ public class CompStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws MyException {
-            MyExeStack stack = state.getExeStack();
+            MyStack stack = state.getExeStack();
             stack.push(secondStmt);
             stack.push(firstStmt);
             return null;

@@ -1,10 +1,10 @@
 package Controller;
 
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Values.RefValue;
 import Model.Values.Value;
 import Repository.IRepo;
-import Utils.MyException;
+import Utils.Exceptions.MyException;
 
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -101,7 +101,7 @@ public class Controller {
     public void allStep() throws MyException, InterruptedException {
         executor = Executors.newFixedThreadPool(2);
         List<PrgState> programStates = removeCompletedPrg(repository.getPrgList());
-        while (programStates.size() > 0) {
+        while (!programStates.isEmpty()) {
             oneStepForAllPrograms(programStates);
             conservativeGarbageCollector(programStates);
             programStates = removeCompletedPrg(repository.getPrgList());
@@ -142,5 +142,13 @@ public class Controller {
         return heap.entrySet().stream()
                 .filter(e -> ( symTableAddresses.contains(e.getKey()) || heapAddresses.contains(e.getKey())))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    public void setProgramStates(List<PrgState> programStates) {
+        this.repository.setPrgList(programStates);
+    }
+
+    public List<PrgState> getProgramStates() {
+        return this.repository.getPrgList();
     }
 }

@@ -1,7 +1,7 @@
 package View.Command;
 
 import Controller.Controller;
-import Utils.MyException;
+import Utils.Exceptions.MyException;
 
 public class RunCommand extends Command {
     private Controller controller;

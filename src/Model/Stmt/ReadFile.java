@@ -1,14 +1,14 @@
 package Model.Stmt;
 
 import Model.Exp.Exp;
-import Model.PrgState;
+import Model.ProgramState.PrgState;
 import Model.Types.Int;
 import Model.Types.StringType;
 import Model.Types.Type;
 import Model.Values.IntValue;
 import Model.Values.StringValue;
-import Utils.MyException;
-import Utils.MyIDic;
+import Utils.Exceptions.MyException;
+import Utils.Collections.MyIDic;
 
 public class ReadFile implements IStmt{
     private Exp exp;
@@ -29,7 +29,7 @@ public class ReadFile implements IStmt{
        if (!state.getSymTable().contains(varName) || !state.getSymTable().lookUp(varName).getType().equals(i)) {
            throw new MyException("The var is not defines or it doesn't match the type.");
        }
-       var buffer = state.getFileTable().lookUp((StringValue) value);
+       var buffer = state.getFileTable().lookUp(value.toString());
        try {
            String line = buffer.readLine();
            if (line == null) {
